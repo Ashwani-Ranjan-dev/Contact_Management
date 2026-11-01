@@ -15,7 +15,7 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const FRONTEND_PATH = path.resolve(__dirname, "../frontend");
+const FRONTEND_PATH = path.resolve(__dirname, "../Frontend");
 
 // Middleware
 app.use(cors({
@@ -42,6 +42,10 @@ app.use("/api/contacts", contactRoutes);
 
 // Serve frontend files
 app.use(express.static(FRONTEND_PATH));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(FRONTEND_PATH, "index.html"));
+});
 
 // Start server
 const startServer = async () => {
